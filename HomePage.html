@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Language Learning App</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .wave-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .wave-shape svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+        .wave-shape .shape-fill {
+            fill: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="relative bg-gray-50 min-h-screen font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="gradient-bg shadow-xl fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <a href="#" class="text-2xl font-bold text-white flex items-center" onclick="showSection('hero')">
+                <i class="fas fa-language mr-2"></i> LanguageHub
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" onclick="showSection('features')" class="text-white hover:text-blue-200 transition font-medium">Features</a>
+                <a href="AboutLangs.html" class="text-white hover:text-blue-200 transition font-medium">Languages</a>
+                <a href="#" onclick="showSection('contact')" class="text-white hover:text-blue-200 transition font-medium">Contact</a>
+                <a href="pricing.html" class="ml-4 px-6 py-2 bg-white text-blue-600 font-semibold rounded-full hover:bg-blue-50 hover:text-blue-700 transition shadow-lg transform hover:scale-105">
+                    Premium
+                <a href="UserSignUpPage.html" class="ml-4 px-6 py-2 bg-white text-blue-600 font-semibold rounded-full hover:bg-blue-50 hover:text-blue-700 transition shadow-lg transform hover:scale-105">
+                    Get Started
+                </a>
+            </div>
+            <button class="md:hidden text-white text-2xl focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden gradient-bg px-6 pb-4" id="mobile-menu">
+            <div class="flex flex-col space-y-3">
+                <a href="#" onclick="showSection('features')" class="text-white hover:text-blue-200 transition font-medium">Features</a>
+                <a href="#" class="text-white hover:text-blue-200 transition font-medium">Languages</a>
+                <a href="#" onclick="showSection('contact')" class="text-white hover:text-blue-200 transition font-medium">Contact</a>
+                <a href="#" class="px-4 py-2 bg-white text-blue-600 font-semibold rounded-full hover:bg-blue-50 text-center">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-32 pb-20 md:pt-40 md:pb-32 flex flex-col justify-center items-center text-center px-6 relative overflow-hidden gradient-bg">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/always-grey.png')]"></div>
+        </div>
+        <div class="container mx-auto relative z-10">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+                Master New Languages <br> <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-blue-400">The Fun Way!</span> 🌍
+            </h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto mt-4">
+                Immerse yourself in interactive lessons, track your progress, and join a community of language enthusiasts.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="Dashboard.html" class="px-8 py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 transition-all shadow-xl transform hover:scale-105 flex items-center justify-center">
+                    <i class="fas fa-play-circle mr-2"></i> Dashboard
+                </a>
+            </div>
+        </div>
+        <div class="wave-shape">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-blue-500 font-semibold uppercase tracking-wider">Why Choose Us</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-2">Your Path to Fluency</h2>
+                <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Discover a revolutionary approach to language learning that adapts to your style and pace.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-comments text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center text-gray-800">Interactive Lessons</h3>
+                    <p class="mt-4 text-gray-600 text-center">Engage with live sessions, AI-powered conversations, and fun challenges that make learning feel like play.</p>
+                    <div class="mt-6 text-center">
+                        <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">New Feature</span>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-chart-line text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center text-gray-800">Progress Tracking</h3>
+                    <p class="mt-4 text-gray-600 text-center">Our smart dashboard visualizes your progress and adapts lessons to keep you motivated and challenged.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-globe-americas text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center text-gray-800">20+ Languages</h3>
+                    <p class="mt-4 text-gray-600 text-center">From Spanish to Japanese, learn with native speakers and culturally relevant content.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-microphone-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center text-gray-800">Pronunciation Coach</h3>
+                    <p class="mt-4 text-gray-600 text-center">Our AI analyzes your speech and provides instant feedback to perfect your accent.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-users text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center text-gray-800">Community Learning</h3>
+                    <p class="mt-4 text-gray-600 text-center">Join study groups, language exchanges, and cultural events with fellow learners.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-mobile-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center text-gray-800">Mobile Friendly</h3>
+                    <p class="mt-4 text-gray-600 text-center">Learn on the go with our award-winning app, available on all devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-blue-50 hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-blue-500 font-semibold uppercase tracking-wider">Success Stories</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-2">What Our Learners Say</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-user text-blue-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Sarah K.</h4>
+                            <div class="flex text-yellow-400 mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"I went from zero to conversational Spanish in just 3 months! The interactive lessons made all the difference."</p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-user text-blue-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Michael T.</h4>
+                            <div class="flex text-yellow-400 mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The pronunciation feedback helped me sound like a native French speaker. My colleagues are impressed!"</p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-user text-blue-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Priya M.</h4>
+                            <div class="flex text-yellow-400 mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"I love the cultural notes that come with each lesson. It's not just language, but understanding the people too."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-blue-700 to-blue-900 text-white hidden">
+        <div class="container mx-auto max-w-6xl px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Have Questions?<br>We're Here to Help</h2>
+                    <p class="text-blue-200 mb-8">Our team is available 24/7 to answer your questions about our courses, methodology, or anything else.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email Us</h4>
+                                <p class="text-blue-200">support@languagehub.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Call Us</h4>
+                                <p class="text-blue-200">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Visit Us</h4>
+                                <p class="text-blue-200">123 Language Street, San Francisco, CA 94107</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-xl shadow-2xl">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" />
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" />
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                            <select id="subject" name="subject"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700">
+                                <option value="general">General Inquiry</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full gradient-bg text-white py-3 px-6 rounded-lg hover:opacity-90 transition font-semibold shadow-lg transform hover:scale-[1.01]">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-language mr-2"></i> LanguageHub
+                    </h3>
+                    <p class="text-gray-400">Making language learning accessible, fun, and effective for everyone.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showSection('features')">Features</a></li>
+                        <li><a href="AvailableLangs.html" class="text-gray-400 hover:text-white transition">Languages</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showSection('testimonials')">Testimonials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showSection('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Language Quizzes</h4>
+                    <ul class="space-y-2">
+                        <li><a href="EnglishQuiz.html" class="text-gray-400 hover:text-white transition">English</a></li>
+                        <li><a href="FrenchQuiz.html" class="text-gray-400 hover:text-white transition">French</a></li>
+                        <li><a href="SpanishQuiz.html" class="text-gray-400 hover:text-white transition">Spanish</a></li>
+                        <li><a href="GermanQuiz.html" class="text-gray-400 hover:text-white transition">German</a></li>
+                        <li><a href="ItalianQuiz.html" class="text-gray-400 hover:text-white transition">Italian</a></li>
+                        <li><a href="JapeneseQuiz.html" class="text-gray-400 hover:text-white transition">Japanese</a></li>
+                        <li><a href="MandarinQuiz.html" class="text-gray-400 hover:text-white transition">Mandarin</a></li>
+                        <li><a href="RussianQuiz.html" class="text-gray-400 hover:text-white transition">Russian</a></li>
+                        <li><a href="KoreanQuiz.html" class="text-gray-400 hover:text-white transition">Korean</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe for tips and updates.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 Language Hub. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="PrivacyPolicyPage.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
+                    <a href="TermOfServicePage.html" class="text-gray-400 hover:text-white transition">Terms of Service</a>
+                    <a href="CookiesPage.html" class="text-gray-400 hover:text-white transition">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-blue-700">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Function to show sections
+        function showSection(sectionId) {
+            // Hide mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Hide all sections first
+            document.getElementById('hero').classList.add('hidden');
+            document.getElementById('features').classList.add('hidden');
+            document.getElementById('testimonials').classList.add('hidden');
+            document.getElementById('contact').classList.add('hidden');
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            // Scroll to section smoothly
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form validation and submission
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (name === '' || email === '' || message === '') {
+                //alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Simple email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                //alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4';
+            successMessage.innerHTML = `
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">Your message has been sent. We'll get back to you soon.</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <i class="fas fa-times cursor-pointer" onclick="this.parentElement.parentElement.remove()"></i>
+                </span>
+            `;
+            
+            const form = document.getElementById('contactForm');
+            form.parentNode.insertBefore(successMessage, form);
+            form.reset();
+        });
+
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

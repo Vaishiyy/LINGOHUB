@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russian Language Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 250%;
+            animation: float 6s infinite ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+    <div class="particles absolute inset-0 overflow-hidden" id="particles"></div>
+
+    <a href="AvailableLangs.html" class="absolute top-4 left-4 z-20 bg-white bg-opacity-90 hover:bg-opacity-100 px-4 py-2 rounded-lg shadow-md flex items-center transition-all duration-300 hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Languages
+    </a>
+
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl relative z-10">
+        <h2 class="text-4xl font-extrabold text-center text-blue-600 mb-6 drop-shadow-md">Russian Language Quiz</h2>
+
+        <div id="quizContainer" class="space-y-6">
+            <div class="flex justify-between items-center text-lg font-medium">
+                <div class="text-blue-600 font-semibold">
+                    Question <span id="questionNumber">1</span>/<span id="totalQuestions">10</span>
+                </div>
+                <div id="timerContainer" class="text-red-500 font-bold">
+                    Time Left: <span id="timer">30</span>s
+                </div>
+            </div>
+
+            <div class="flex items-center bg-blue-50 p-4 rounded-md shadow-md border-l-4 border-blue-500">
+                <div id="question" class="text-2xl font-bold text-gray-800 flex-grow"></div>
+                <button id="speakBtn" class="ml-4 bg-blue-100 hover:bg-blue-200 p-2 rounded-full transition duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                </button>
+            </div>
+            <div id="options" class="space-y-3"></div>
+
+            <div class="flex justify-end pt-4">
+                <button onclick="nextQuestion()" class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-lg shadow-md transform transition duration-200 hover:scale-105">
+                    Next ➡️
+                </button>
+            </div>
+        </div>
+
+        <div id="scoreContainer" class="hidden text-center mt-6">
+            <h3 class="text-3xl font-bold text-green-500 drop-shadow-md">🎉 Quiz Completed! 🎉</h3>
+            <p class="text-lg mt-2">Your Final Score: <span id="finalScore" class="font-semibold text-blue-500">0</span> / 10</p>
+            <div class="flex justify-center space-x-4 mt-6">
+                <button onclick="restartQuiz()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-200 hover:scale-105">
+                    🔄 Restart Quiz
+                </button>
+                <a href="HomePage.html" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-200 hover:scale-105 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "Что значит 'Здравствуйте' на английском?", options: ["Goodbye", "Hello", "Please", "Yes"], answer: "Hello" },
+            { question: "Как по-русски будет 'apple'?", options: ["апельсин", "яблоко", "груша", "банан"], answer: "яблоко" },
+            { question: "Как сказать 'спасибо' по-русски?", options: ["пожалуйста", "спасибо", "здравствуйте", "до свидания"], answer: "спасибо" },
+            { question: "Что означает 'друзья'?", options: ["други", "другов", "друзья", "другами"], answer: "друзья" },
+            { question: "Как сказать 'Я изучаю русский язык'?", options: ["Я учу русский", "Я ем русский", "Я бегаю русский", "Я смотрю русский"], answer: "Я учу русский" },
+            { question: "Как сказать 'До свидания' по-русски?", options: ["здравствуйте", "до свидания", "спасибо", "пожалуйста"], answer: "до свидания" },
+            { question: "Что означает 'учитель'?", options: ["врач", "учитель", "студент", "родитель"], answer: "учитель" },
+            { question: "Как будет 'вода' по-русски?", options: ["огонь", "вода", "ветер", "земля"], answer: "вода" },
+            { question: "Как по-русски сказать 'Russia'?", options: ["США", "Китай", "Россия", "Япония"], answer: "Россия" },
+            { question: "Как сказать 'Я тебя люблю' по-русски?", options: ["Я тебе нравлюсь", "Я твой", "Я люблю тебя", "Ты мой"], answer: "Я люблю тебя" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timer;
+        const totalQuestions = questions.length;
+        let speechSynthesis = window.speechSynthesis;
+        let answeredQuestions = new Array(totalQuestions).fill(false);
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                const size = Math.random() * 8 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function speakQuestion(text) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ru-RU';
+            utterance.rate = 0.95;
+            utterance.pitch = 1.1;
+            speechSynthesis.speak(utterance);
+        }
+
+        function loadQuestion() {
+            clearInterval(timer);
+            document.getElementById('questionNumber').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = totalQuestions;
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+
+            document.getElementById('speakBtn').onclick = () => speakQuestion(currentQuestion.question);
+
+            const optionsElement = document.getElementById('options');
+            optionsElement.innerHTML = "";
+
+            currentQuestion.options.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'block w-full px-4 py-3 bg-gray-200 hover:bg-blue-100 text-gray-700 rounded-lg border border-gray-300 shadow-md transition duration-200 hover:scale-105';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(option, btn);
+                optionsElement.appendChild(btn);
+            });
+
+            startTimer(30);
+        }
+
+        function checkAnswer(selectedOption, btn) {
+            clearInterval(timer);
+            const currentQuestion = questions[currentQuestionIndex];
+            const allButtons = document.querySelectorAll("#options button");
+
+            allButtons.forEach(button => button.disabled = true);
+
+            if (selectedOption === currentQuestion.answer) {
+                btn.classList.add('bg-green-100', 'border-green-500');
+                btn.innerHTML = `${selectedOption} <span class="text-green-500">✅</span>`;
+                if (!answeredQuestions[currentQuestionIndex]) {
+                    score++;
+                    answeredQuestions[currentQuestionIndex] = true;
+                }
+            } else {
+                btn.classList.add('bg-red-100', 'border-red-500');
+                btn.innerHTML = `${selectedOption} <span class="text-red-500">❌</span>`;
+
+                allButtons.forEach(button => {
+                    if (button.textContent === currentQuestion.answer) {
+                        button.classList.add('bg-green-100', 'border-green-500');
+                        button.innerHTML = `${currentQuestion.answer} <span class="text-green-500">✅</span>`;
+                    }
+                });
+
+                answeredQuestions[currentQuestionIndex] = true;
+            }
+
+            setTimeout(nextQuestion, 1200);
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function startTimer(seconds) {
+            let timeLeft = seconds;
+            document.getElementById('timer').textContent = timeLeft;
+
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+
+                if (timeLeft <= 10) {
+                    document.getElementById('timerContainer').classList.add('text-orange-500');
+                }
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function showScore() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('scoreContainer').classList.remove('hidden');
+            document.getElementById('finalScore').textContent = score;
+        }
+
+        function restartQuiz() {
+            score = 0;
+            currentQuestionIndex = 0;
+            answeredQuestions = new Array(totalQuestions).fill(false);
+            document.getElementById('quizContainer').classList.remove('hidden');
+            document.getElementById('scoreContainer').classList.add('hidden');
+            document.getElementById('finalScore').textContent = '0';
+            loadQuestion();
+        }
+
+        window.onload = function () {
+            createParticles();
+            loadQuestion();
+        };
+    </script>
+</body>
+</html>

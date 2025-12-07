@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinguaMaster | Unlock Fluency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2962ff;
+            --secondary: #00b0ff;
+            --dark: #0a192f;
+            --light: #f8f9fa;
+            --accent: #18ffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a192f 0%, #2962ff 100%);
+            color: var(--light);
+            font-family: 'Segoe UI', 'SF Pro', -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin: 20px;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            text-decoration: none;
+            color: white;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card__container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card__content {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .card__content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .card__pricing {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .card__pricing-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .card__pricing-symbol {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-right: 2px;
+            color: var(--accent);
+        }
+
+        .card__pricing-month {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+
+        .card__header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .card__header-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, rgba(41,98,255,0.2) 0%, rgba(0,176,255,0.2) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .card__header-img {
+            width: 60px;
+            height: 60px;
+            filter: brightness(0) invert(1);
+        }
+
+        .card__header-subtitle {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card__header-title {
+            font-size: 1.8rem;
+            margin: 0;
+            color: white;
+            font-weight: 800;
+        }
+
+        .card__list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+        }
+
+        .card__list-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .card__list-icon {
+            color: var(--accent);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .card__list-description {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .card__button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .card__button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(41, 98, 255, 0.5);
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(24, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .card__container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="HomePage.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to Learning
+    </a>
+    
+    <section class="card container grid">
+        <div class="card__container grid">
+            <!--==================== TIER 1 ====================-->
+            <article class="card__content grid">
+                <div class="card__pricing">
+                    <div class="card__pricing-number">
+                        <span class="card__pricing-symbol">₹</span>0
+                    </div>
+                    <span class="card__pricing-month">/month</span>
+                </div>
+
+                <header class="card__header">                    
+                    <span class="card__header-subtitle">Starter</span>
+                    <h1 class="card__header-title">Language Explorer</h1>
+                </header>
+                
+                <ul class="card__list grid">
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">10 practice questions daily</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Basic vocabulary access</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Limited grammar exercises</p>
+                    </li>
+                </ul>
+
+                <button class="card__button" id="free-tier-btn">
+                    <i class="fas fa-language"></i> Start Learning
+                </button>
+            </article>
+
+            <!--==================== TIER 2 ====================-->
+            <article class="card__content grid" style="border: 2px solid var(--accent);">
+                <div class="popular-badge">MOST POPULAR</div>
+                <div class="card__pricing">
+                    <div class="card__pricing-number">
+                        <span class="card__pricing-symbol">₹</span>190
+                    </div>
+                    <span class="card__pricing-month">/month</span>
+                </div>
+
+                <header class="card__header">
+                    <span class="card__header-subtitle">Smart Choice</span>
+                    <h1 class="card__header-title">Fluency Builder</h1>
+                </header>
+                
+                <ul class="card__list grid">
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Unlimited practice questions</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Advanced vocabulary builder</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Full grammar exercises</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Pronunciation practice</p>
+                    </li>
+                </ul>
+
+                <button class="card__button" id="main-tier-btn">
+                    <i class="fas fa-brain"></i> Boost My Fluency
+                </button>
+            </article>
+
+            <!--==================== TIER 3 ====================-->
+            <article class="card__content grid">
+                <div class="card__pricing">
+                    <div class="card__pricing-number">
+                        <span class="card__pricing-symbol">₹</span>490
+                    </div>
+                    <span class="card__pricing-month">/month</span>
+                </div>
+
+                <header class="card__header">                    
+                    <span class="card__header-subtitle">Mastery</span>
+                    <h1 class="card__header-title">Lingua Master</h1>
+                </header>
+                
+                <ul class="card__list grid">
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Everything in Fluency Builder</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Personalized tutor sessions</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Conversation simulations</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Writing correction service</p>
+                    </li>
+                    <li class="card__list-item">
+                        <i class="fas fa-check card__list-icon"></i>
+                        <p class="card__list-description">Priority support 24/7</p>
+                    </li>
+                </ul>
+
+                <button class="card__button" id="boss-tier-btn">
+                    <i class="fas fa-trophy"></i> Master the Language
+                </button>
+            </article>
+        </div>
+    </section>
+    <script>
+        document.getElementById('free-tier-btn').addEventListener('click', () => {
+            window.location.href = 'AvailableLangs.html';
+        });
+    
+        document.getElementById('main-tier-btn').addEventListener('click', () => {
+            window.location.href = 'Payment.html';
+        });
+    
+        document.getElementById('boss-tier-btn').addEventListener('click', () => {
+            window.location.href = 'paymentb.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Language Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --dark-blue: #1e40af;
+            --light-blue: #93c5fd;
+            --sky-blue: #bfdbfe;
+            --white: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 2rem;
+        }
+        
+        .back-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--white), var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 2rem;
+        }
+        
+        .language-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .language-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05));
+            z-index: -1;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .language-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+        
+        .language-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .language-card p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .learn-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .learn-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .floating-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .language-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-bubbles">
+        <!-- Bubbles will be added by JS -->
+    </div>
+    
+    <div class="container">
+        <a href="Dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+        
+        <header>
+            <h1>Explore World Languages</h1>
+            <p class="subtitle">Click any language below to discover the best YouTube resources for learning</p>
+        </header>
+        
+        <div class="language-grid">
+            <!-- English -->
+            <div class="language-card" onclick="window.open('https://youtu.be/henIVlCPVIY?si=la3147Ul1qUaCgOJ', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h2>English</h2>
+                <p>Global communication starts here</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- French -->
+            <div class="language-card" onclick="window.open('https://youtu.be/Sk6YQynZ1h8?si=zYJbQFwvBrwpBa_x', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-glass-martini-alt"></i>
+                </div>
+                <h2>French</h2>
+                <p>Language of love and diplomacy</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- Spanish -->
+            <div class="language-card" onclick="window.open('https://youtu.be/lZMMqMvY1d0?si=rRWa0_G6Lofj0Vur', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h2>Spanish</h2>
+                <p>Spoken by 500 million people worldwide</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- Mandarin -->
+            <div class="language-card" onclick="window.open('https://youtu.be/QhhI0dyqbpE?si=ca0ByXBaaxaCUq_Y', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-dragon"></i>
+                </div>
+                <h2>Mandarin</h2>
+                <p>Most spoken language on Earth</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- Italian -->
+            <div class="language-card" onclick="window.open('https://youtu.be/VeH03PzD25E?si=82kTyaAG6t9dfhGk', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-pizza-slice"></i>
+                </div>
+                <h2>Italian</h2>
+                <p>Music to your ears</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- Japanese -->
+            <div class="language-card" onclick="window.open('https://youtu.be/G_oC7anVuA8?si=Nd3-rQRooJIrEqqn', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-torii-gate"></i>
+                </div>
+                <h2>Japanese</h2>
+                <p>Unlock anime and culture</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- Russian -->
+            <div class="language-card" onclick="window.open('https://youtu.be/QhhI0dyqbpE?si=ca0ByXBaaxaCUq_Y', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-monument"></i>
+                </div>
+                <h2>Russian</h2>
+                <p>Slavic beauty in words</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- Korean -->
+            <div class="language-card" onclick="window.open('https://youtu.be/ZinAK6n6cWU?si=5S8i5Gy0jumw3ayp', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-hat-cowboy"></i>
+                </div>
+                <h2>Korean</h2>
+                <p>K-pop and K-drama await</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+            
+            <!-- German -->
+            <div class="language-card" onclick="window.open('https://youtu.be/xg60VxyK-9I?si=H3QWIzdM1ZZJVXA_', '_blank')">
+                <div class="language-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h2>German</h2>
+                <p>From 'Guten Tag' to 'Wunderbar'.</p>
+                <div class="learn-btn">Start Learning</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating bubbles
+        const bubbleContainer = document.querySelector('.floating-bubbles');
+        const bubbleCount = 15;
+        
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            
+            // Random size between 10px and 100px
+            const size = Math.random() * 90 + 10;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // Random position
+            bubble.style.left = `${Math.random() * 100}%`;
+            
+            // Random animation duration between 10s and 20s
+            bubble.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            
+            // Random delay
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            
+            bubbleContainer.appendChild(bubble);
+        }
+        
+        // Add click effect to cards
+        document.querySelectorAll('.language-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

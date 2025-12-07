@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Languages</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            min-height: 100vh;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .features {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .features h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .feature-box {
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--dark);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: none;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .feature-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0.3),
+                rgba(255,255,255,0)
+            );
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+        
+        .feature-box:hover::before {
+            left: 100%;
+        }
+        
+        .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+        }
+        
+        .feature-box h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .button-container {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .flag-img {
+            width: 50px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .start-quiz-btn, .home-btn {
+            text-decoration: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .start-quiz-btn {
+            background: linear-gradient(45deg, var(--accent), #ff6b6b);
+        }
+        
+        .home-btn {
+            background: linear-gradient(45deg, #4CAF50, #2E8B57);
+        }
+        
+        .start-quiz-btn:hover, .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+        
+        .start-quiz-btn::before, .home-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+            z-index: -1;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .start-quiz-btn:hover::before, .home-btn:hover::before {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="features">
+        <!-- Buttons Container -->
+        <div class="button-container">
+            <a href="QuizPage.html" class="start-quiz-btn">Start Master Quiz</a>
+            <a href="HomePage.html" class="home-btn">Home</a>
+        </div>
+        
+        <h2>Available Languages</h2>
+        <div class="grid">
+            <!-- Language 1 -->
+            <a href="EnglishQuiz.html" class="feature-box">
+                <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag-img"></div>
+                <h3>English</h3>
+            </a>
+            <!-- Language 2 -->
+            <a href="FrenchQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="France Flag" class="flag-img">
+                </div>
+                <h3>French</h3>
+            </a>
+            <!-- Language 3 -->
+            <a href="SpanishQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg" alt="Spain Flag" class="flag-img">
+                </div>
+                <h3>Spanish</h3>
+            </a>
+            <!-- Language 4 -->
+            <a href="GermanQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="Germany Flag" class="flag-img">
+                </div>
+                <h3>German</h3>
+            </a>
+            <!-- Language 5 -->
+            <a href="ItalianQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" alt="Italy Flag" class="flag-img">
+                </div>
+                <h3>Italian</h3>
+            </a>
+            <!-- Language 6 -->
+            <a href="JapeneseQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg" alt="Japan Flag" class="flag-img">
+                </div>
+                <h3>Japanese</h3>
+            </a>
+            <!-- Language 7 -->
+            <a href="MandarinQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg" alt="China Flag" class="flag-img">
+                </div>
+                <h3>Mandarin</h3>
+            </a>
+            <!-- Language 8 -->
+            <a href="RussianQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg" alt="Russia Flag" class="flag-img">
+                </div>
+                <h3>Russian</h3>
+            </a>
+            <!-- Language 9 -->
+            <a href="KoreanQuiz.html" class="feature-box">
+                <div class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg" alt="Korea Flag" class="flag-img">
+                </div>
+                <h3>Korean</h3>
+            </a>
+        </div>
+        <div>
+            <footer class="bg-blue-900 text-white py-6">
+                <div class="container mx-auto px-4 text-center">
+                    <p class="mt-6 text-gray-400 text-sm">&copy; <span id="year"></span> 2025 Language Hub. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+        
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        window.onload = function() {
+            createParticles();
+        };
+    </script>
+</body>
+</html>

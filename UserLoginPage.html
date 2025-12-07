@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .icon-container {
+      width: 110px;
+      height: 110px;
+      font-size: 56px;
+      background-color: #e0e7ff;
+      color: #1e40af;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.6; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 0.6; transform: scale(0.95); }
+    }
+
+    .home-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background-color: #1e40af;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 10;
+      font-size: 15px;
+    }
+
+    .home-btn:hover {
+      background-color: #1e3a8a;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] overflow-hidden">
+
+  <!-- Home Button -->
+  <a href="HomePage.html" class="home-btn flex items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+    </svg>
+    Home
+  </a>
+
+  <!-- Login Box -->
+  <div class="bg-white bg-opacity-90 px-8 py-6 rounded-xl shadow-2xl w-full max-w-md max-h-[95vh]">
+    <div class="icon-container mx-auto rounded-full flex items-center justify-center mb-4">👥</div>
+    <h2 class="text-2xl font-semibold text-center text-blue-600 mb-5">User Login</h2>
+
+    <form id="loginForm" class="space-y-4 text-base">
+      <div>
+        <label for="userId" class="block text-gray-700 font-medium">User ID</label>
+        <input type="text" id="userId" name="userId" required
+          class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </div>
+
+      <div>
+        <label for="email" class="block text-gray-700 font-medium">Email</label>
+        <input type="email" id="email" name="email" required
+          class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </div>
+
+      <div>
+        <label for="password" class="block text-gray-700 font-medium">Password</label>
+        <div class="relative">
+          <input type="password" id="password" name="password" required
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          <button type="button" onclick="togglePassword()" 
+            class="absolute inset-y-0 right-3 flex items-center text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M15 12m0-3a3 3 0 100 6 3 3 0 000-6zM2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center">
+        <input type="checkbox" id="rememberMe" name="rememberMe" class="text-blue-500 focus:ring-blue-400" />
+        <label for="rememberMe" class="ml-2 text-gray-700">Remember Me</label>
+      </div>
+
+      <button type="submit"
+        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition duration-300">
+        Login
+      </button>
+
+      <p class="text-center">
+        <a href="#" class="text-blue-500 hover:underline">Forgot Password?</a>
+      </p>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const password = document.getElementById('password');
+      password.type = password.type === 'password' ? 'text' : 'password';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+      
+      const userId = document.getElementById('userId').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!userId || !email || !password) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      // If validation passes, redirect to AvailableLangs.html
+      window.location.href = 'AvailableLangs.html';
+    });
+
+    function validateEmail(email) {
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(email);
+    }
+  </script>
+</body>
+</html>

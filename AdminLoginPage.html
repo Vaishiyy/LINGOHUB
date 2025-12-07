@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        .particle {
+            z-index: 0;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 300%;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.6; transform: scale(0.95); }
+        }
+        
+        .icon-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .icon-container {
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            background-color: #e0e7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: #1e40af;
+            margin: 20px auto;
+        }
+        .home-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background-color: #1e40af;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 20;
+      font-size: 15px;
+    }
+
+    .home-btn:hover {
+      background-color: #1e3a8a;
+    }
+    </style>
+</head>
+<body class="min-h-screen" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); font-family: 'Poppins', sans-serif;">
+    <!-- Floating Particles Background -->
+    <div class="particles absolute inset-0 overflow-hidden" id="particles"></div>
+    
+    <!-- Home Button -->
+    <a href="HomePage.html" class="home-btn flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+        </svg>
+        Home
+    </a>
+
+    
+
+    <div class="flex items-center justify-center min-h-screen relative z-10">
+        <div class="bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl w-full max-w-md transform transition-all duration-300 hover:shadow-3xl">
+            <!-- Logo Container -->
+            <div class="icon-container">🛡️</div>
+            
+            <h2 class="text-2xl font-bold text-center text-blue-500 mb-2">Admin Portal</h2>
+            <p class="text-center text-gray-600 mb-6">Secure access for administrators</p>
+
+            <form id="loginForm" class="space-y-4">
+                <!-- Username -->
+                <div>
+                    <label for="username" class="block font-medium text-gray-700">Admin ID</label>
+                    <input type="text" id="username" name="username" required 
+                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition duration-200">
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password" class="block font-medium text-gray-700">Password</label>
+                    <div class="relative">
+                        <input type="password" id="password" name="password" required 
+                            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition duration-200">
+                        <button type="button" onclick="togglePassword()" 
+                            class="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-blue-500 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M15 12m0-3a3 3 0 100 6 3 3 0 000-6zM2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="rememberMe" name="rememberMe" 
+                            class="text-blue-500 focus:ring-blue-400">
+                        <label for="rememberMe" class="ml-2 text-gray-700">Remember Me</label>
+                    </div>
+                    <a href="#" class="text-blue-500 hover:underline text-sm">Forgot Password?</a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-lg transition duration-300 transform hover:scale-105 shadow-md">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 8 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Show/Hide Password
+        function togglePassword() {
+            const password = document.getElementById('password');
+            const icon = document.querySelector('#password + button svg');
+            password.type = password.type === 'password' ? 'text' : 'password';
+            
+            // Change eye icon
+            if (password.type === 'password') {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12m0-3a3 3 0 100 6 3 3 0 000-6zM2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />';
+            }
+        }
+    
+        // Form Validation
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+    
+            if (!username || !password) {
+                alert('Please fill out all fields.');
+                event.preventDefault();
+                return;
+            }
+    
+            // Simulate loading before success message
+            event.preventDefault();
+            const btn = document.querySelector('#loginForm button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = 'Authenticating...';
+            
+            setTimeout(() => {
+                // Redirect to admin dashboard after successful login
+                window.location.href = "AdminLoggedIn.html";
+            }, 1500);
+        });
+    
+        // Initialize particles
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
